@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Карта пользовательских историй – Автосервис (как на картинке)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        /* Карточка этапа */
+        .stage {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .stage-header {
+            background-color: #b8d9f5; /* синий */
+            padding: 15px 20px;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #003366;
+            border-bottom: 2px solid #4a6fa5;
+        }
+        .stage-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        /* Колонка приоритета */
+        .priority-column {
+            flex: 1 1 250px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid;
+        }
+        .priority-column.must {
+            border-left-color: #2e7d32; /* зелёный для must */
+        }
+        .priority-column.should {
+            border-left-color: #ed6c02; /* оранжевый для should */
+        }
+        .priority-column.could {
+            border-left-color: #9c27b0; /* фиолетовый для could */
+        }
+        .priority-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #eee;
+        }
+        .priority-header.must {
+            color: #2e7d32;
+        }
+        .priority-header.should {
+            color: #ed6c02;
+        }
+        .priority-header.could {
+            color: #9c27b0;
+        }
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .action-item {
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+        }
+        .action-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        .detail-list {
+            list-style: disc;
+            margin: 5px 0 0 20px;
+            padding-left: 0;
+            color: #555;
+            font-size: 0.95em;
+        }
+        .detail-list li {
+            margin-bottom: 3px;
+        }
+        .legend {
+            margin: 30px 0 20px;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+        }
+        .legend-color.stage { background-color: #b8d9f5; border: 1px solid #4a6fa5; }
+        .legend-color.must { background-color: #2e7d32; }
+        .legend-color.should { background-color: #ed6c02; }
+        .legend-color.could { background-color: #9c27b0; }
+        .footer {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .footer h2 {
+            color: #333;
+            font-size: 1.3em;
+            border-bottom: 2px solid #b8d9f5;
+            padding-bottom: 5px;
+        }
+        .footer p {
+            line-height: 1.6;
+        }
+        .note {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Карта пользовательских историй (User Story Mapping)<br>Автосервис: управление ремонтом</h1>
+
+    <!-- Легенда -->
+    <div class="legend">
+        <div class="legend-item"><span class="legend-color stage"></span> Этап пользовательского пути</div>
+        <div class="legend-item"><span class="legend-color must"></span> Сделать обязательно (MVP, релиз 1)</div>
+        <div class="legend-item"><span class="legend-color should"></span> Хорошо бы сделать (релиз 2)</div>
+        <div class="legend-item"><span class="legend-color could"></span> Можно будет сделать (релиз 3)</div>
+    </div>
+
+    <div class="container">
+        <!-- Этап 1: Запись на сервис -->
+        <div class="stage">
+            <div class="stage-header">1. Запись на сервис</div>
+            <div class="stage-content">
+                <!-- Колонка MUST (MVP) -->
+                <div class="priority-column must">
+                    <div class="priority-header must">✅ Сделать обязательно (MVP)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">1.1 Выбор услуги</div>
+                            <ul class="detail-list">
+                                <li>Просмотр списка услуг</li>
+                                <li>Фильтр по марке автомобиля</li>
+                            </ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">1.2 Выбор даты и времени</div>
+                            <ul class="detail-list">
+                                <li>Просмотр свободных слотов</li>
+                                <li>Выбор удобного времени</li>
+                            </ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">1.3 Ввод контактных данных</div>
+                            <ul class="detail-list">
+                                <li>Имя, телефон, госномер, модель авто</li>
+                            </ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">1.4 Подтверждение записи</div>
+                            <ul class="detail-list">
+                                <li>Отправка заявки</li>
+                                <li>Получение подтверждения</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Колонка SHOULD (ver.2) -->
+                <div class="priority-column should">
+                    <div class="priority-header should">⭐ Хорошо бы сделать (ver.2)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">1.5 Отмена / перенос записи</div>
+                            <ul class="detail-list">
+                                <li>Возможность отменить или перенести запись</li>
+                            </ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">1.6 Напоминание о записи</div>
+                            <ul class="detail-list">
+                                <li>Push-уведомление или email за 24 часа</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Колонка COULD (ver.3) – пока пусто, но оставим для симметрии -->
+                <div class="priority-column could">
+                    <div class="priority-header could">💡 Можно будет сделать (ver.3)</div>
+                    <ul class="action-list">
+                        <!-- В этом этапе нет could, можно оставить пустым или добавить позже -->
+                        <li style="color: #aaa; font-style: italic;">—</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Этап 2: Приём автомобиля -->
+        <div class="stage">
+            <div class="stage-header">2. Приём автомобиля</div>
+            <div class="stage-content">
+                <div class="priority-column must">
+                    <div class="priority-header must">✅ Сделать обязательно (MVP)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">2.1 Регистрация прибытия</div>
+                            <ul class="detail-list"><li>Отметка администратором о приезде клиента</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">2.2 Создание заказ-наряда</div>
+                            <ul class="detail-list">
+                                <li>Выбор клиента из базы</li>
+                                <li>Добавление автомобиля</li>
+                                <li>Добавление услуг и запчастей</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column should">
+                    <div class="priority-header should">⭐ Хорошо бы сделать (ver.2)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">2.3 Согласование работ с клиентом</div>
+                            <ul class="detail-list">
+                                <li>Печать или электронная подпись заказ-наряда</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column could">
+                    <div class="priority-header could">💡 Можно будет сделать (ver.3)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">2.4 Фотографирование авто</div>
+                            <ul class="detail-list">
+                                <li>Прикрепление фото текущего состояния к заказу</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Этап 3: Выполнение работ -->
+        <div class="stage">
+            <div class="stage-header">3. Выполнение работ</div>
+            <div class="stage-content">
+                <div class="priority-column must">
+                    <div class="priority-header must">✅ Сделать обязательно (MVP)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">3.1 Получение задания механиком</div>
+                            <ul class="detail-list"><li>Просмотр списка работ на день с указанием запчастей</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">3.3 Отметка о завершении работы</div>
+                            <ul class="detail-list">
+                                <li>Завершение задачи</li>
+                                <li>Фиксация фактического времени</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column should">
+                    <div class="priority-header should">⭐ Хорошо бы сделать (ver.2)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">3.2 Отметка о начале работы</div>
+                            <ul class="detail-list"><li>Механик стартует задачу</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">3.4 Запрос дополнительных работ</div>
+                            <ul class="detail-list"><li>Отправка запроса администратору на согласование с клиентом</li></ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column could">
+                    <div class="priority-header could">💡 Можно будет сделать (ver.3)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">3.5 Заказ доп. запчастей</div>
+                            <ul class="detail-list"><li>Интеграция со складом / поставщиками</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">3.6 Комментирование работы</div>
+                            <ul class="detail-list"><li>Заметки механика о выполненном ремонте</li></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Этап 4: Закрытие заказа и оплата -->
+        <div class="stage">
+            <div class="stage-header">4. Закрытие заказа и оплата</div>
+            <div class="stage-content">
+                <div class="priority-column must">
+                    <div class="priority-header must">✅ Сделать обязательно (MVP)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">4.1 Расчёт итоговой стоимости</div>
+                            <ul class="detail-list"><li>Автоматический подсчёт работ и запчастей</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">4.2 Формирование чека</div>
+                            <ul class="detail-list"><li>Печать чека или создание электронной версии</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">4.3 Приём оплаты</div>
+                            <ul class="detail-list"><li>Интеграция с кассой / терминалом</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">4.4 Закрытие заказ-наряда</div>
+                            <ul class="detail-list">
+                                <li>Смена статуса на «закрыт»</li>
+                                <li>Сохранение данных</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column should">
+                    <div class="priority-header should">⭐ Хорошо бы сделать (ver.2)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">4.5 Отправка чека клиенту</div>
+                            <ul class="detail-list"><li>На email или в личный кабинет</li></ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column could">
+                    <div class="priority-header could">💡 Можно будет сделать (ver.3)</div>
+                    <ul class="action-list"><li style="color: #aaa;">—</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Этап 5: Пост-обслуживание -->
+        <div class="stage">
+            <div class="stage-header">5. Пост-обслуживание</div>
+            <div class="stage-content">
+                <div class="priority-column must">
+                    <div class="priority-header must">✅ Сделать обязательно (MVP)</div>
+                    <ul class="action-list"><li style="color: #aaa;">—</li></ul>
+                </div>
+                <div class="priority-column should">
+                    <div class="priority-header should">⭐ Хорошо бы сделать (ver.2)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">5.1 Просмотр истории ремонтов</div>
+                            <ul class="detail-list"><li>Личный кабинет клиента с архивами заказ-нарядов и чеков</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">5.4 Повторная запись</div>
+                            <ul class="detail-list"><li>Быстрая запись на основе предыдущего заказа</li></ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="priority-column could">
+                    <div class="priority-header could">💡 Можно будет сделать (ver.3)</div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="action-title">5.2 Оценка качества работы</div>
+                            <ul class="detail-list"><li>Возможность оставить отзыв о сервисе</li></ul>
+                        </li>
+                        <li class="action-item">
+                            <div class="action-title">5.3 Напоминание о следующем ТО</div>
+                            <ul class="detail-list"><li>Автоматические уведомления о предстоящем обслуживании</li></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ответы на вопросы (внизу как в методичке) -->
+    <div class="footer">
+        <h2>Ответы на вопросы</h2>
+        <h3>1. Что означает акроним INVEST?</h3>
+        <p><strong>INVEST</strong> – критерии качества пользовательских историй:</p>
+        <ul>
+            <li><strong>I</strong> (Independent) – независимость.</li>
+            <li><strong>N</strong> (Negotiable) – обсуждаемость.</li>
+            <li><strong>V</strong> (Valuable) – ценность.</li>
+            <li><strong>E</strong> (Estimable) – оцениваемость.</li>
+            <li><strong>S</strong> (Small) – малый размер.</li>
+            <li><strong>T</strong> (Testable) – тестируемость.</li>
+        </ul>
+
+        <h3>2. Для чего используется техника User Story Mapping?</h3>
+        <p>USM помогает визуализировать пользовательский путь, структурировать требования, выявлять пробелы, приоритизировать и планировать релизы, улучшать коммуникацию в команде и фокусироваться на потребностях пользователей.</p>
+
+        <h3>3. Методы приоритизации требований</h3>
+        <p>Наиболее популярные: MoSCoW (Must/Should/Could/Won't), Kano model, RICE, WSJF, Story Mapping, 100-долларовый тест. В данной работе использован MoSCoW с разбивкой по релизам.</p>
+    </div>
+
+    <div class="note">
+        * Цветовое кодирование: синий — этапы, зелёный — MVP (релиз 1), оранжевый — релиз 2, фиолетовый — релиз 3.
+    </div>
+</body>
+</html>

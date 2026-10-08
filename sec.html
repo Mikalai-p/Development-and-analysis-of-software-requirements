@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Автосервис – выделение релизов (как на картинке)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .columns-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 равных колонок */
+            gap: 20px;
+            align-items: start;
+            margin-bottom: 30px;
+        }
+        .column {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .stage-header {
+            background-color: #b8d9f5; /* синий */
+            padding: 15px 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            color: #003366;
+            border-bottom: 2px solid #4a6fa5;
+        }
+        .priority-block {
+            padding: 12px 10px;
+            border-bottom: 1px solid #ddd;
+            flex: 1;
+            position: relative;
+        }
+        .priority-block:last-child {
+            border-bottom: none;
+        }
+        .priority-block.must {
+            background-color: #ffe5b4; /* жёлтый */
+        }
+        .priority-block.should {
+            background-color: #e0e0e0; /* серый */
+        }
+        .priority-block.could {
+            background-color: #f5f5f5; /* светло-серый */
+        }
+        .priority-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 4px;
+        }
+        .action-list {
+            list-style-type: disc;
+            margin: 5px 0 20px 20px;
+            padding-left: 0;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+        .action-list li {
+            margin-bottom: 4px;
+        }
+        .version {
+            text-align: right;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+            border-top: 1px dashed #aaa;
+            padding-top: 5px;
+        }
+        .legend {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 20px 0 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .legend-color.stage { background-color: #b8d9f5; }
+        .legend-color.must { background-color: #ffe5b4; }
+        .legend-color.should { background-color: #e0e0e0; }
+        .legend-color.could { background-color: #f5f5f5; }
+        .note {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>5. Выделите релизы</h1>
+    <div class="subtitle">Автосервис: управление ремонтом (параллельные столбцы)</div>
+
+    <!-- Легенда цветов -->
+    <div class="legend">
+        <div class="legend-item"><span class="legend-color stage"></span> Этап (синий)</div>
+        <div class="legend-item"><span class="legend-color must"></span> Сделать обязательно (жёлтый) – ver.1 MVP</div>
+        <div class="legend-item"><span class="legend-color should"></span> Хорошо бы сделать (серый) – ver.2</div>
+        <div class="legend-item"><span class="legend-color could"></span> Можно будет сделать (светло-серый) – ver.3</div>
+    </div>
+
+    <!-- Пять параллельных колонок -->
+    <div class="columns-container">
+        <!-- Колонка 1: Запись на сервис -->
+        <div class="column">
+            <div class="stage-header">Запись на сервис</div>
+            <div class="priority-block must">
+                <div class="priority-title">Сделать обязательно</div>
+                <ul class="action-list">
+                    <li>Выбор услуги</li>
+                    <li>Выбор даты и времени</li>
+                    <li>Ввод контактных данных</li>
+                    <li>Подтверждение записи</li>
+                </ul>
+                <div class="version">ver.1 (MVP)</div>
+            </div>
+            <div class="priority-block should">
+                <div class="priority-title">Хорошо бы сделать</div>
+                <ul class="action-list">
+                    <li>Отмена / перенос записи</li>
+                </ul>
+                <div class="version">ver.2</div>
+            </div>
+            <div class="priority-block could">
+                <div class="priority-title">Можно будет сделать</div>
+                <ul class="action-list">
+                    <li>Напоминание о записи</li>
+                </ul>
+                <div class="version">ver.3</div>
+            </div>
+        </div>
+
+        <!-- Колонка 2: Приём автомобиля -->
+        <div class="column">
+            <div class="stage-header">Приём автомобиля</div>
+            <div class="priority-block must">
+                <div class="priority-title">Сделать обязательно</div>
+                <ul class="action-list">
+                    <li>Регистрация прибытия</li>
+                    <li>Создание заказ-наряда</li>
+                </ul>
+                <div class="version">ver.1 (MVP)</div>
+            </div>
+            <div class="priority-block should">
+                <div class="priority-title">Хорошо бы сделать</div>
+                <ul class="action-list">
+                    <li>Согласование работ с клиентом</li>
+                </ul>
+                <div class="version">ver.2</div>
+            </div>
+            <div class="priority-block could">
+                <div class="priority-title">Можно будет сделать</div>
+                <ul class="action-list">
+                    <li>Фотографирование авто</li>
+                </ul>
+                <div class="version">ver.3</div>
+            </div>
+        </div>
+
+        <!-- Колонка 3: Выполнение работ -->
+        <div class="column">
+            <div class="stage-header">Выполнение работ</div>
+            <div class="priority-block must">
+                <div class="priority-title">Сделать обязательно</div>
+                <ul class="action-list">
+                    <li>Получение задания механиком</li>
+                    <li>Отметка о завершении работы</li>
+                </ul>
+                <div class="version">ver.1 (MVP)</div>
+            </div>
+            <div class="priority-block should">
+                <div class="priority-title">Хорошо бы сделать</div>
+                <ul class="action-list">
+                    <li>Отметка о начале работы</li>
+                    <li>Запрос дополнительных работ</li>
+                </ul>
+                <div class="version">ver.2</div>
+            </div>
+            <div class="priority-block could">
+                <div class="priority-title">Можно будет сделать</div>
+                <ul class="action-list">
+                    <li>Заказ доп. запчастей</li>
+                    <li>Комментирование работы</li>
+                </ul>
+                <div class="version">ver.3</div>
+            </div>
+        </div>
+
+        <!-- Колонка 4: Закрытие заказа и оплата -->
+        <div class="column">
+            <div class="stage-header">Закрытие заказа и оплата</div>
+            <div class="priority-block must">
+                <div class="priority-title">Сделать обязательно</div>
+                <ul class="action-list">
+                    <li>Расчёт итоговой стоимости</li>
+                    <li>Формирование чека</li>
+                    <li>Приём оплаты</li>
+                    <li>Закрытие заказ-наряда</li>
+                </ul>
+                <div class="version">ver.1 (MVP)</div>
+            </div>
+            <div class="priority-block should">
+                <div class="priority-title">Хорошо бы сделать</div>
+                <ul class="action-list">
+                    <li>Отправка чека клиенту</li>
+                </ul>
+                <div class="version">ver.2</div>
+            </div>
+            <div class="priority-block could">
+                <div class="priority-title">Можно будет сделать</div>
+                <ul class="action-list">
+                    <li><em>(нет задач)</em></li>
+                </ul>
+                <div class="version">ver.3</div>
+            </div>
+        </div>
+
+        <!-- Колонка 5: Пост-обслуживание -->
+        <div class="column">
+            <div class="stage-header">Пост-обслуживание</div>
+            <div class="priority-block must">
+                <div class="priority-title">Сделать обязательно</div>
+                <ul class="action-list">
+                    <li><em>(нет задач)</em></li>
+                </ul>
+                <div class="version">ver.1 (MVP)</div>
+            </div>
+            <div class="priority-block should">
+                <div class="priority-title">Хорошо бы сделать</div>
+                <ul class="action-list">
+                    <li>Просмотр истории ремонтов</li>
+                    <li>Повторная запись</li>
+                </ul>
+                <div class="version">ver.2</div>
+            </div>
+            <div class="priority-block could">
+                <div class="priority-title">Можно будет сделать</div>
+                <ul class="action-list">
+                    <li>Оценка качества работы</li>
+                    <li>Напоминание о следующем ТО</li>
+                </ul>
+                <div class="version">ver.3</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        * Цвета соответствуют методичке: синий – этапы, жёлтый – MVP, серый – ver.2, светло-серый – ver.3.
+    </div>
+</body>
+</html>
